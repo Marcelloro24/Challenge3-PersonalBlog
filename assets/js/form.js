@@ -1,15 +1,20 @@
-const blogFormEl= document.querySelector("form");
-const blogs=  JSON.parse(localStorage.getItem("blogs"))  || [];
+const blogFormEl = document.querySelector("form");
+const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
 
 
-const handleFormSubmit = function(event) {
+const handleFormSubmit = function (event) {
     event.preventDefault();
 
-    const usernameEl=document.querySelector("#username").value.trim();
-    const titleEl=document.querySelector("#title").value.trim();
-    const contentEl=document.querySelector("#content").value.trim();
+    const usernameEl = document.querySelector("#username").value.trim();
+    const titleEl = document.querySelector("#title").value.trim();
+    const contentEl = document.querySelector("#content").value.trim();
 
-    const newBlog={
+    if (!usernameEl || !titleEl || !contentEl) {
+        alert("Please complete all the form");
+        return;
+    }
+
+    const newBlog = {
         username: usernameEl,
         title: titleEl,
         content: contentEl,
@@ -17,10 +22,10 @@ const handleFormSubmit = function(event) {
     }
 
     blogs.push(newBlog);
-    localStorage.setItem("blogs", JSON.stringify(blogs) );
+    localStorage.setItem("blogs", JSON.stringify(blogs));
     document.location.replace("blog.html");
 
 }
 
-blogFormEl.addEventListener("submit",handleFormSubmit);
+blogFormEl.addEventListener("submit", handleFormSubmit);
 
