@@ -1,5 +1,6 @@
 const mainEl = document.querySelector("main");
-const blogs=JSON.parse(localStorage.getItem("blogs")) || [];
+const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
+const buts = document.querySelector(".buts")
 
 const createEl = function (dynamicEl, text, parentEl) {
     const tag = document.createElement(dynamicEl);
@@ -9,7 +10,7 @@ const createEl = function (dynamicEl, text, parentEl) {
     return tag
 }
 
-const loadBlogs = function(){
+const loadBlogs = function () {
 
 
 
@@ -20,4 +21,9 @@ const loadBlogs = function(){
         createEl("p", blog.username, article);
     }
 }
+
+buts.addEventListener("click", () => {
+    location.href = "./index.html";
+})
+
 loadBlogs();
