@@ -1,21 +1,23 @@
-const section = document.querySelector("section");
+const mainEl = document.querySelector("main");
 const blogs=JSON.parse(localStorage.getItem("blogs")) || [];
 
-function loadBlogs(){
+const createEl = function (dynamicEl, text, parentEl) {
+    const tag = document.createElement(dynamicEl);
+    tag.textContent = text;
+    parentEl.appendChild(tag);
 
-    section.textContent="";
-
-    for(let i = 0 ; i < blogs.length ; i++){
-        let article = document.createElement("article");
-        let h3 = document.createElement("h3");
-        let hr= document.createElement("hr");
-        let pSentence= document.createElement("p");
-        let pPost= document.createElement("p");
-        h3.textContent=blogs[i].title;
-        pSentence.classList.add("sentence");
-        pSentence.textContent=blogs[i].content;
-        pPost.innerHTML="Posted By: <span>" + blogs[i].username+"</span>"
-
-    }
-
+    return tag
 }
+
+const loadBlogs = function(){
+
+
+
+    for (let blog of blogs) {
+        const article = createEl("article", null, mainEl);
+        createEl("h3", blog.title, article);
+        createEl("p", blog.content, article);
+        createEl("p", blog.username, article);
+    }
+}
+loadBlogs();
